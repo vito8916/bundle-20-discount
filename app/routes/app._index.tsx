@@ -110,6 +110,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           title: DISCOUNT_TITLE,
           functionId: discountFunction.id,
           startsAt: new Date().toISOString(),
+          discountClasses: ["PRODUCT"],
           combinesWith: {
             orderDiscounts: false,
             productDiscounts: false,
