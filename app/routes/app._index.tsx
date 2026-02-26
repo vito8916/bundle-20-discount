@@ -311,7 +311,7 @@ export default function Index() {
             borderRadius="base"
             background="subdued"
           >
-            <s-stack direction="block" gap="tight">
+            <s-stack direction="block" gap="small">
               <s-stack direction="inline" gap="base">
                 <s-badge tone="success">1 bundle</s-badge>
                 <s-text>
