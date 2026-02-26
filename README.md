@@ -37,6 +37,7 @@ bundleCount = min(coreCount, floor(patchCount / 3))
 | Database | Prisma + SQLite (session & discount state) |
 | UI | Polaris web components (`<s-*>`) |
 | API version | 2026-01 |
+| Hosting | Vercel — https://bundle-20-discount.vercel.app |
 
 ---
 
@@ -186,19 +187,33 @@ npm run typegen
 
 ## Deployment
 
-**1. Deploy the app and extension**
+The web app is hosted on **Vercel** at `https://bundle-20-discount.vercel.app`.
+
+**1. Push to Vercel**
+
+Vercel deploys automatically on every push to the main branch. To trigger a manual deploy:
+
+```shell
+vercel --prod
+```
+
+Make sure all environment variables are set in the Vercel dashboard before deploying (see [Environment Variables](#environment-variables) below).
+
+**2. Deploy the Shopify Function extension**
+
+The Vercel deploy only covers the web app. The Shopify Function must be separately deployed via the Shopify CLI:
 
 ```shell
 shopify app deploy
 ```
 
-This compiles the Shopify Function to WASM and registers everything with Shopify. After deploy, the function ID becomes stable.
+This compiles the discount function to WASM and registers it with Shopify. The `shopify.app.toml` URL is already set to the Vercel domain. Run this whenever the function logic or `shopify.app.toml` changes.
 
-**2. Install on a production store**
+**3. Install on a production store**
 
 Use the install link from the Shopify Partner Dashboard (custom distribution). After OAuth completes, open the app admin and click **Create Discount** to activate.
 
-**3. Build the web app for production**
+**4. Build the web app locally (optional)**
 
 ```shell
 npm run build
@@ -211,13 +226,15 @@ npm start
 
 Set these in your hosting environment (or `.env` for local dev):
 
-| Variable | Description |
-|----------|-------------|
-| `SHOPIFY_API_KEY` | Your app's client ID (from Partner Dashboard) |
-| `SHOPIFY_API_SECRET` | Your app's client secret |
-| `SHOPIFY_APP_URL` | The public URL of your deployed app |
-| `SCOPES` | `write_discounts,read_products` |
-| `DATABASE_URL` | Database connection string (omit for SQLite default) |
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `SHOPIFY_API_KEY` | App client ID (from Partner Dashboard) | `a1651cc7f12c0ae...` |
+| `SHOPIFY_API_SECRET` | App client secret | `shpss_...` |
+| `SHOPIFY_APP_URL` | Public URL of the deployed app | `https://bundle-20-discount.vercel.app` |
+| `SCOPES` | Required OAuth scopes | `write_discounts,read_products` |
+| `DATABASE_URL` | Database connection string | omit for SQLite default |
+
+These are set in the **Vercel dashboard** under Project → Settings → Environment Variables for the production deployment.
 
 ---
 
