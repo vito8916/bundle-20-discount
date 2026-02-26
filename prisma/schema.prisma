@@ -32,3 +32,14 @@ model Session {
   refreshToken        String?
   refreshTokenExpires DateTime?
 }
+
+model AppDiscount {
+  id         String   @id @default(cuid())
+  shop       String   @unique
+  discountId String
+  functionId String
+  title      String
+  status     String   @default("ACTIVE")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

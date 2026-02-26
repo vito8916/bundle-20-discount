@@ -1,0 +1,73 @@
+{
+  "payload": {
+    "export": "cart-lines-discounts-generate-run",
+    "target": "cart.lines.discounts.generate.run",
+    "input": {
+      "cart": {
+        "lines": [
+          {
+            "id": "gid://shopify/CartLine/0",
+            "quantity": 1,
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "product": {
+                "bundleRole": { "value": "core" }
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/1",
+            "quantity": 1,
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "product": {
+                "bundleRole": { "value": "patch" }
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/2",
+            "quantity": 1,
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "product": {
+                "bundleRole": { "value": "patch" }
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/CartLine/3",
+            "quantity": 1,
+            "merchandise": {
+              "__typename": "ProductVariant",
+              "product": {
+                "bundleRole": { "value": "patch" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "output": {
+      "operations": [
+        {
+          "productDiscountsAdd": {
+            "candidates": [
+              {
+                "message": "Bundle 20% Off (1 bundle)",
+                "targets": [
+                  { "cartLine": { "id": "gid://shopify/CartLine/0", "quantity": 1 } },
+                  { "cartLine": { "id": "gid://shopify/CartLine/1", "quantity": 1 } },
+                  { "cartLine": { "id": "gid://shopify/CartLine/2", "quantity": 1 } },
+                  { "cartLine": { "id": "gid://shopify/CartLine/3", "quantity": 1 } }
+                ],
+                "value": { "percentage": { "value": 20.0 } }
+              }
+            ],
+            "selectionStrategy": "FIRST"
+          }
+        }
+      ]
+    }
+  }
+}

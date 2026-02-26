@@ -5,9 +5,6 @@
     "input": {
       "cart": {
         "lines": []
-      },
-      "discount": {
-        "discountClasses": ["ORDER", "PRODUCT"]
       }
     },
     "output": {
